@@ -1,0 +1,63 @@
+from typing import List, Optional, Dict, Any
+from pydantic import BaseModel, Field
+
+class CompanyTarget(BaseModel):
+    name: str
+    program: Optional[str] = None
+    career_url: Optional[str] = None
+
+class CommunityCitation(BaseModel):
+    source: str
+    type: Optional[str] = None
+    url: Optional[str] = None
+    note: Optional[str] = None
+
+class InterviewStage(BaseModel):
+    stage: int
+    name: str
+    duration: str
+    interviewer: str
+    focus_areas: List[str] = Field(default_factory=list)
+    passing_criteria: str
+
+class EvaluationPillar(BaseModel):
+    pillar: str
+    pillar_en: str
+    weight_percent: int
+    criteria: str
+
+class TechnicalQuestion(BaseModel):
+    id: str
+    question: str
+    question_en: Optional[str] = None
+    level: str
+    key_concepts: List[str] = Field(default_factory=list)
+    expected_answer: str
+    scoring_rubric: Dict[str, str] = Field(default_factory=dict)
+    citation_url: Optional[str] = None
+
+class STARBehavioralQuestion(BaseModel):
+    id: str
+    question: str
+    evaluation_focus: str
+    star_criteria: Dict[str, str] = Field(default_factory=dict)
+
+class InterviewFramework(BaseModel):
+    position_id: str
+    role_title: str
+    major_category: str
+    target_levels: List[str] = Field(default_factory=list)
+    target_competencies: List[str] = Field(default_factory=list)
+    target_companies_vn: List[CompanyTarget] = Field(default_factory=list)
+    vn_recruitment_process: Optional[str] = None
+    vn_community_citations: List[CommunityCitation] = Field(default_factory=list)
+    frequently_asked_by: List[str] = Field(default_factory=list)
+    interview_stages: List[InterviewStage] = Field(default_factory=list)
+    evaluation_matrix: List[EvaluationPillar] = Field(default_factory=list)
+    scoring_anchors: Dict[str, str] = Field(default_factory=dict)
+    passing_thresholds: Dict[str, str] = Field(default_factory=dict)
+    evaluation_rubric: Optional[Dict[str, Any]] = None
+    technical_questions: List[TechnicalQuestion] = Field(default_factory=list)
+    behavioral_questions: List[STARBehavioralQuestion] = Field(default_factory=list)
+    citations: List[Dict[str, str]] = Field(default_factory=list)
+    markdown_file: Optional[str] = None
