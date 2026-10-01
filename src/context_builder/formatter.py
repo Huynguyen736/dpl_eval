@@ -43,7 +43,7 @@ class ContextFormatter:
         # 3. Technical Questions with Rubrics
         tech_q_blocks = []
         for i, q in enumerate(retrieved.selected_technical_questions, 1):
-            concepts = ", ".join(q.key_concepts)
+            concepts = ", ".join(q.key_concepts) if q.key_concepts else "Kiến thức nền tảng & thực hành chuyên môn"
             rubric_lines = "\n".join([f"    + Mức {k.upper()}: {v}" for k, v in q.scoring_rubric.items()])
             tech_q_blocks.append(
                 f"  <QUESTION id=\"{q.id}\" order=\"{i}\" level=\"{q.level}\">\n"
@@ -121,9 +121,9 @@ class ContextFormatter:
   <DIRECTIVE>Hãy chú trọng đặt câu hỏi kỹ thuật xoáy sâu vào các kỹ năng trong mục MISSING_SKILLS_TO_PROBE để xác thực ứng viên có thực sự biết hay chỉ học thuộc.</DIRECTIVE>
 </SKILL_GAP_ANALYSIS>
 
-<INTERVIEW_BLUEPRINT stage_name="{cur_stage.name if cur_stage else 'Technical Round'}" duration="{cur_stage.duration if cur_stage else '45 phút'}">
+<INTERVIEW_BLUEPRINT stage_name="{cur_stage.stage_name if cur_stage and getattr(cur_stage, 'stage_name', None) else (cur_stage.name if cur_stage else 'Technical Round')}" duration="{cur_stage.duration if cur_stage else '45 phút'}">
   <STAGE_FOCUS>
-{chr(10).join(['  - ' + f for f in (cur_stage.focus_areas if cur_stage else [])])}
+{chr(10).join(['  - ' + f for f in (cur_stage.focus_areas if cur_stage and cur_stage.focus_areas else ([cur_stage.description] if cur_stage and getattr(cur_stage, 'description', None) else ['Kiểm tra năng lực chuyên môn']))])}
   </STAGE_FOCUS>
   <STAGE_PASSING_CRITERIA>{cur_stage.passing_criteria if cur_stage else 'N/A'}</STAGE_PASSING_CRITERIA>
 

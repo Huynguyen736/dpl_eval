@@ -17,40 +17,63 @@ class FilteredRetriever(BaseRetriever):
     def _map_title_to_position(self, title: str, domain: str) -> str:
         import re
         t_lower = (title + " " + domain).lower()
-        if re.search(r"\b(qa|qc|test|tester|automation)\b", t_lower):
-            return "IF_QA"
-        if re.search(r"\b(frontend|react|vue|angular|web)\b", t_lower):
-            return "IF_FE"
-        if re.search(r"\b(java|spring)\b", t_lower):
-            return "IF_JAVA"
-        if re.search(r"\b(python|django|fastapi)\b", t_lower):
-            return "IF_PY"
-        if re.search(r"\b(\.net|c#|dotnet|asp\.net)\b", t_lower):
-            return "IF_NET"
-        if re.search(r"\b(devops|cloud|sre)\b", t_lower):
+        if re.search(r"\b(automation test|automation qc|automation qa|tester tự động)\b", t_lower):
+            return "IF_AUTO_QA"
+        if re.search(r"\b(qa|qc|test|tester|manual test|kiểm thử)\b", t_lower):
+            return "IF_QA_QC"
+        if re.search(r"\b(unity|game|gameplay|unreal)\b", t_lower):
+            return "IF_UNITY"
+        if re.search(r"\b(android|kotlin)\b", t_lower):
+            return "IF_MOBILE_ANDROID"
+        if re.search(r"\b(ios|swift)\b", t_lower):
+            return "IF_MOBILE_IOS"
+        if re.search(r"\b(embedded|firmware|vi điều khiển|microcontroller|autosar|can bus|iot|hardware)\b", t_lower):
+            return "IF_EMBEDDED"
+        if re.search(r"\b(network|sysadmin|system engineer|hạ tầng mạng|cisco|telecom|infrastructure)\b", t_lower):
+            return "IF_NETWORK"
+        if re.search(r"\b(devops|cloud|sre|kubernetes|ci/cd)\b", t_lower):
             return "IF_DEVOPS"
-        if re.search(r"\b(machine learning|deep learning|nlp|computer vision|ai engineer)\b", t_lower):
-            return "IF_AI"
-        if re.search(r"\b(data|etl|dba|bi|database)\b", t_lower):
-            return "IF_DATA"
-        if re.search(r"\b(security|soc|pentest)\b", t_lower):
-            return "IF_SEC"
-        if re.search(r"\b(embedded|automotive|autosar|firmware)\b", t_lower):
-            return "IF_AUTO"
-        if re.search(r"\b(business analyst|it ba)\b", t_lower):
+        if re.search(r"\b(erp|odoo|sap|crm)\b", t_lower):
+            return "IF_ERP"
+        if re.search(r"\b(product engineer|growth engineer)\b", t_lower):
+            return "IF_PRODUCT_ENG"
+        if re.search(r"\b(business analyst|it ba|phân tích nghiệp vụ|product owner)\b", t_lower):
             return "IF_BA"
-        if re.search(r"\b(robot|slam|ros)\b", t_lower):
-            return "IF_ROBOT"
-        if re.search(r"\b(ui/ux|ui designer|product designer)\b", t_lower):
-            return "IF_UIUX"
-        if re.search(r"\b(blockchain|solidity|web3)\b", t_lower):
-            return "IF_CHAIN"
-        if re.search(r"\b(system|network|infrastructure)\b", t_lower):
-            return "IF_SYS"
+        if re.search(r"\b(agentic|ai agent)\b", t_lower):
+            return "IF_AGENTIC_AI"
+        if re.search(r"\b(ai software|llm|rag|genai)\b", t_lower):
+            return "IF_AI_SWE"
+        if re.search(r"\b(ai engineer|machine learning|deep learning|nlp|computer vision|trí tuệ nhân tạo)\b", t_lower):
+            return "IF_AI"
+        if re.search(r"\b(data analyst|business intelligence|bi analyst|phân tích dữ liệu)\b", t_lower):
+            return "IF_DA"
+        if re.search(r"\b(data scientist|nhà khoa học dữ liệu)\b", t_lower):
+            return "IF_DS"
+        if re.search(r"\b(data engineer|big data|etl|data pipeline|database|dba|kho dữ liệu)\b", t_lower):
+            return "IF_DE"
+        # 11. Frontend
+        if re.search(r"\b(frontend|front-end|react|vue|angular|web developer|ui/ux)\b", t_lower):
+            return "IF_FE"
+
+        # 12. Specific Backends
+        if re.search(r"\b(java|spring)\b", t_lower):
+            return "IF_BE_JAVA"
+        if re.search(r"\b(\.net|dotnet|c#|asp\.net)\b", t_lower):
+            return "IF_BE_NET"
+        if re.search(r"\b(php|laravel)\b", t_lower):
+            return "IF_BE_PHP"
+        if re.search(r"\b(python|django|fastapi|golang|go|backend|node|nodejs)\b", t_lower):
+            return "IF_BE_GEN"
+
+        # 13. Fullstack
+        if re.search(r"\b(fullstack|full-stack|full stack)\b", t_lower):
+            return "IF_FULLSTACK"
+        if re.search(r"\b(software engineer)\b", t_lower):
+            return "IF_SWE"
         return "IF_FE"
 
     def retrieve(self, candidate: CandidateProfile, job: JobDescription, top_k_questions: int = 3) -> RetrievedContext:
-        position_id = self._map_title_to_position(job.normalized_title, job.domain)
+        position_id = self._map_title_to_position(f"{job.normalized_title} {job.title} {job.job_family}", job.domain)
         fw_dict = self.db.get_framework(position_id)
         if not fw_dict:
             # Fallback to first available

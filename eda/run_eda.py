@@ -113,7 +113,7 @@ def run_eda():
     report.append(f"- **Tổng số câu hỏi kỹ thuật chuẩn hóa:** {total_tech_q} câu (Trung bình {total_tech_q/len(frameworks):.1f} câu/vị trí)")
     report.append(f"- **Tổng số câu hỏi hành vi STAR:** {total_star_q} câu (Trung bình {total_star_q/len(frameworks):.1f} câu/vị trí)")
 
-    report.append("\n### 3.1. Danh mục 16 vị trí và quy mô câu hỏi:")
+    report.append(f"\n### 3.1. Danh mục {len(frameworks)} vị trí và quy mô câu hỏi:")
     report.append("| Position ID | Tên Vị Trí (Role Title) | Số Câu Kỹ Thuật | Số Câu STAR | Số Giai Đoạn (Stages) | Trụ Cột Đánh Giá |")
     report.append("| :--- | :--- | :---: | :---: | :---: | :---: |")
     for fw in frameworks:
@@ -144,20 +144,22 @@ def run_eda():
         matched_fw = None
         jt_lower = jt.lower()
         for pid, title in fw_positions.items():
-            t_words = [w.lower() for w in title.replace("(", "").replace(")", "").replace("/", " ").split() if len(w) > 2]
             if any(w in jt_lower for w in ["frontend", "react", "web"]) and pid == "IF_FE":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["backend", "java"]) and pid == "IF_JAVA":
+            elif any(w in jt_lower for w in ["backend", "java"]) and pid == "IF_BE_JAVA":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["python", "django", "fastapi"]) and pid == "IF_PY":
+            elif any(w in jt_lower for w in ["python", "django", "fastapi"]) and pid == "IF_BE_GEN":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in [".net", "c#", "dotnet"]) and pid == "IF_NET":
+            elif any(w in jt_lower for w in [".net", "c#", "dotnet"]) and pid == "IF_BE_NET":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["qa", "test", "tester", "qc", "automation"]) and pid == "IF_QA":
+            elif any(w in jt_lower for w in ["automation test", "automation qc"]) and pid == "IF_AUTO_QA":
+                matched_fw = pid
+                break
+            elif any(w in jt_lower for w in ["qa", "test", "tester", "qc"]) and pid == "IF_QA_QC":
                 matched_fw = pid
                 break
             elif any(w in jt_lower for w in ["devops", "cloud", "sre"]) and pid == "IF_DEVOPS":
@@ -166,22 +168,31 @@ def run_eda():
             elif any(w in jt_lower for w in ["ai", "machine learning", "ml", "nlp", "vision"]) and pid == "IF_AI":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["data", "etl", "bi"]) and pid == "IF_DATA":
+            elif any(w in jt_lower for w in ["data engineer", "etl", "database", "dba"]) and pid == "IF_DE":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["security", "soc", "pentest"]) and pid == "IF_SEC":
+            elif any(w in jt_lower for w in ["data analyst", "bi"]) and pid == "IF_DA":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["embedded", "automotive", "autosar"]) and pid == "IF_AUTO":
+            elif any(w in jt_lower for w in ["data science", "data scientist"]) and pid == "IF_DS":
+                matched_fw = pid
+                break
+            elif any(w in jt_lower for w in ["embedded", "automotive", "autosar"]) and pid == "IF_EMBEDDED":
                 matched_fw = pid
                 break
             elif any(w in jt_lower for w in ["business analyst", "ba"]) and pid == "IF_BA":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["ui/ux", "designer", "product designer"]) and pid == "IF_UIUX":
+            elif any(w in jt_lower for w in ["system", "network", "infrastructure"]) and pid == "IF_NETWORK":
                 matched_fw = pid
                 break
-            elif any(w in jt_lower for w in ["system", "network", "infrastructure"]) and pid == "IF_SYS":
+            elif any(w in jt_lower for w in ["fullstack", "full-stack"]) and pid == "IF_FULLSTACK":
+                matched_fw = pid
+                break
+            elif any(w in jt_lower for w in ["software engineer"]) and pid == "IF_SWE":
+                matched_fw = pid
+                break
+            elif any(w in jt_lower for w in ["developer", "lập trình"]) and pid == "IF_SWD":
                 matched_fw = pid
                 break
         
@@ -202,7 +213,7 @@ def run_eda():
     report.append(f"- Số kỹ năng giao thoa chính xác (Exact match): `{len(intersection)}` kỹ năng")
     report.append(f"- Chỉ số tương đồng từ vựng Jaccard: `{jaccard:.3f}`")
     report.append(f"- **Nhận định quan trọng:** Chỉ số Jaccard thấp do sự khác biệt trong cách viết từ vựng (ví dụ: `Node.js` vs `NodeJS` vs `Node`, `C#` vs `C-Sharp`, `React` vs `ReactJS`, `C/C++` vs `C` và `C++`).")
-    report.append(f"  $\Rightarrow$ **Cần xây dựng bộ Skill Synonym Normalizer (Từ điển từ đồng nghĩa chuẩn hóa kỹ năng) trong khâu Preprocessing.**")
+    report.append(r"  $\Rightarrow$ **Cần xây dựng bộ Skill Synonym Normalizer (Từ điển từ đồng nghĩa chuẩn hóa kỹ năng) trong khâu Preprocessing.**")
 
     # =========================================================================
     # 5. KEY TAKEAWAYS FOR INGESTION & RETRIEVAL

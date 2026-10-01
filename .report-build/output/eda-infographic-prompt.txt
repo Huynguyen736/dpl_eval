@@ -1,0 +1,68 @@
+Create ONE high-resolution Vietnamese editorial data infographic, a tall portrait poster approximately 3000 x 4400 pixels, generous readable typography. This is a comprehensive EDA report for project Evaludate, not a decorative illustration. Use crisp vector-like charts, white background, vivid royal blue #1635FF, dark navy text #14192F, lighter periwinkle comparison bars, pale blue separators; small amber accents only for data quality issues. Style matches clean blue-white Vietnamese academic presentation. No stock icons, no AI robots, no gradients, no 3D, no dashboard chrome or rounded cards. Flat publication layout, strict alignment, charts with numerically proportional lengths and clear labels. Accurate Vietnamese accents. All figures below are authoritative; invent no statistics. Do not include benchmark metrics. Make a large clean title "EDA — Dữ liệu cho AI phỏng vấn" and small subtitle "Evaludate • Hồ sơ, tuyển dụng và bộ câu hỏi". Top compact count line "300 CV  |  395 JD  |  25 framework  |  350 câu kỹ thuật".
+
+Use 2 columns of well-spaced sections over a tall poster. Cover ALL the following analyses, with about 10-12 sections, each title plain and concrete. Prioritize readability over squeezing into a slide; use full poster height. Below are exact content and chart instructions:
+
+1. "CV chủ yếu là Fresher, JD chủ yếu là Junior"
+Two horizontal bar charts, matching percentage scales 0–65%, all labels visible.
+CV n=300: Intern 35 (11,7%); Fresher 185 (61,7%); Junior 38 (12,7%); Mid-level 40 (13,3%); Senior 2 (0,7%).
+JD n=395: Intern 28 (7,1%); Fresher 129 (32,7%); Junior 211 (53,4%); Fresher/Junior 14 (3,5%); Fresher/Intern 13 (3,3%).
+Small takeaway: "42 CV Mid/Senior nằm ngoài cấp độ của framework."
+
+2. "CV chia khá đều theo chuyên môn"
+Simple compact bar plot: 14 categories each20, DevOps17, DevOps Engineer3. Show the14 names as neatly wrapped text: React Developer, Web Designing, Java Developer, Python Developer, DotNet Developer, Data Science, Testing, Automation Testing, Database, ETL Developer, Network Security Engineer, Blockchain, Business Analyst, Information Technology. Annotation "DevOps và DevOps Engineer là hai nhãn của cùng nhóm; cần gộp tên."
+
+3. "JD tập trung vào Full-Stack"
+Horizontal ranked bars show ALL 13 job families with counts (not percentages needed):
+Full-Stack186; QA & Testing66; AI & ML26; Data Science & Big Data26; Embedded18; Product & BA18; Backend17; Frontend10; Mobile9; Cloud & DevOps9; Network4; ERP/CRM3; Game3.
+Highlight Full-Stack47,1% and QA16,7%.
+
+4. "Miền nghiệp vụ của JD"
+Horizontal bars: Công nghệ & dịch vụ phần mềm199; BFSI71; Ô tô / IoT / Viễn thông51; Tự động hóa & sản xuất32; Game & giải trí14; E-commerce & SaaS9; Dịch vụ8; F&B / Retail6; IT Consulting5.
+Highlight first50,4%, BFSI18,0%. Do NOT combine categories.
+
+5. "Kinh nghiệm"
+CV: mean1,44 năm; min0,max6; 176/300=58,7% có1năm. Clearly distinguish CV factual years from JD min requirements.
+JD minimum experience bar histogram: 0năm164; 0,5năm1; 1năm104; 2năm114; 3năm9; 4năm1; 5năm1; 10năm1. Note "Tin 10 năm là ngoại lệ cần kiểm tra." All395 have structured min_years; no claims independently verified from original listing.
+
+6. "Hồ sơ thiếu gì?"
+Missing CV fields horizontal percentage bars sorted:
+GitHub293/30097,7%; LinkedIn267/30089,0%; email142/30047,3%; phone137/30045,7%; location75/30025,0%; dự án97/30032,3% (show correct order by percentage).
+Small quality strip "286 nội dung CV khác nhau / 300 hồ sơ" and "14 nội dung CV bị lặp".
+Takeaway "Không dựa vào GitHub/LinkedIn làm điều kiện bắt buộc."
+
+7. "Kỹ năng trong CV" — compact ranked bar chart TOP20 with counts:
+SQL183; Git132; JavaScript100; Linux90; HTML89; Java88; Agile88; Python87; CSS75; MySQL69; Oracle67; JIRA61; Scrum47; AWS44; RESTful API42; Docker38; Selenium36; Jenkins33; PostgreSQL32; Machine Learning31.
+Label counts "Số lần xuất hiện trong danh sách kỹ năng" rather than percent.
+
+8. "Kỹ năng trong JD" — similarly scaled top20 horizontal bar chart:
+SQL122; Python89; CNTT / Kỹ thuật phần mềm78; Machine Learning73; Java64; JavaScript52; Git / GitFlow49; C/C++46; Agile / Scrum43; REST/gRPC42; CAN / LIN41; C# / .NET38; Embedded Systems34; Linux33; LLM / GenAI33; Docker32; CI/CD30; Data Analytics / BI30; ReactJS28; Business Analysis27.
+Same count scale0–200 as CV skills so charts honestly comparable, while note nCV300,nJD395.
+
+9. "Tên kỹ năng trùng nhau ít"
+Proportional three-part segmented bar: Chỉ CV90, Chung29, Chỉ JD40. Clearly displayed totals "CV:119 tên • JD:69 tên • Hợp:159 tên"; "Jaccard = 29/159 = 18,2%".
+Examples React ↔ ReactJS; Git ↔ Git/GitFlow; RESTful API ↔ REST/gRPC as names to review, do not claim semantic identity of all compound concepts.
+Takeaway "Chuẩn hóa tên và tách kỹ năng ghép trước khi tính skill gap."
+Small qualifier "So tên viết thường chính xác; không phải mức thiếu kỹ năng của từng ứng viên."
+
+10. "Bộ câu hỏi và phạm vi framework"
+Question count distribution bar chart 8câu/vị trí:4framework;12câu/vị trí:10framework;18câu/vị trí:11framework. Total350;average14.
+Text "25 vị trí • Intern / Fresher / Junior" and "Mỗi framework: 5 chặng hỏi, 4 trụ cột đánh giá".
+"350/350 câu kỹ thuật có đáp án và rubric 3 mức".
+Data quality callout "75 bản ghi STAR → chỉ 3 câu hỏi khác nhau".
+"342 question_id khác nhau; 350 khóa (position_id, question_id)".
+Takeaway "Lưu câu hỏi cùng đáp án/rubric; dùng khóa ghép."
+
+11. "Ánh xạ chức danh cần kiểm tra"
+"25 chức danh JD đã chuẩn hóa". Show tiny 2-row diagnostic comparison:
+"Android → IF_DA" marked mapping hiện tại sai; "Đúng: IF_MOBILE_ANDROID".
+"Embedded → IF_SWE" marked mapping hiện tại quá rộng; "Cần đối soát: IF_EMBEDDED".
+Do not claim all mappings correct or validated. Do not reproduce fabricated coverage metric.
+
+12. Bottom concise summary "Từ dữ liệu đến cách lưu và tìm"
+Flow with3steps and specific content:
+"Chuẩn hóa: tên kỹ năng, nhãn nghề; kiểm tra bản ghi lặp"
+→ "Lưu: metadata SQLite + JSON; câu hỏi + đáp án + rubric"
+→ "Tìm: lọc vị trí, ưu tiên cấp độ; xếp hạng theo kỹ năng JD và dự án CV".
+Smaller line "Chỉ mục hiện tại: BM25 + TF-IDF/SVD" and "EDA gợi ý cấu trúc dữ liệu; hiệu quả chiến lược được kiểm tra ở benchmark" omit last generic sentence if crowded; better no boilerplate.
+
+Footer "Nguồn: data/candidates.json, jobs_below_mid.json, interview_frameworks.json • eda/eda_report.md". Exclude names, emails, phone numbers and personal record contents. Clean high-quality Vietnamese report, meaningful section titles, no generic slogan. Absolutely ensure charts and values match supplied data, no mixed CV vs JD statistics. The attached slide is only a palette/style reference; this new poster needs much more content.

@@ -12,7 +12,7 @@ Hầu hết các hệ thống Mock Interview hiện nay gặp phải hai lỗi p
 
 **Evaludate** giải quyết triệt để bài toán này bằng cách:
 * **Chuẩn hóa đầu vào:** Bóc tách Form/PDF của ứng viên và JD thành cấu trúc dữ liệu giàu ngữ cảnh.
-* **Xây dựng Knowledge Base vững chắc:** Tích hợp 16 khung phỏng vấn chuẩn hóa (`interview_frameworks`) cùng 395 JD thực tế thị trường Việt Nam (`jobs_below_mid`).
+* **Xây dựng Knowledge Base vững chắc:** Tích hợp 25 khung phỏng vấn chuẩn hóa (`interview_frameworks`) cùng 395 JD thực tế thị trường Việt Nam (`jobs_below_mid`).
 * **Retrieval "ĐÚNG và ĐỦ":**
   * **ĐÚNG:** Đúng vị trí chuyên môn, đúng cấp bậc năng lực, đúng câu hỏi kỹ thuật kèm barem chuẩn.
   * **ĐỦ:** Phủ toàn diện các yêu cầu bắt buộc (`must_have_requirements`) và yêu cầu ưu tiên (`preferred_requirements`) theo từng giai đoạn phỏng vấn.
@@ -22,7 +22,7 @@ Hầu hết các hệ thống Mock Interview hiện nay gặp phải hai lỗi p
 
 ## 2. Phạm Vi Dự Án (Scope)
 
-* **Lĩnh vực công nghệ:** 16 nhóm ngành kỹ thuật then chốt (Software Engineering, Frontend, Java Backend, Python Backend, .NET, QA/QC, DevOps & Cloud, AI/ML, Data Science, Cyber Security, Semiconductor/IC Design, Automotive Embedded, IT Business Analyst, Robotics, UI/UX Design, Systems/IT Infra).
+* **Lĩnh vực công nghệ:** 25 vị trí công nghệ then chốt trải rộng trên 6 nhóm ngành lớn (Data & AI, Software Engineering, Quality Assurance, Infrastructure & Cloud, Hardware & Embedded, Business Analysis & Product).
 * **Cấp bậc mục tiêu:** Nhóm dưới Mid-level đổ lại, bao gồm **Intern**, **Fresher**, và **Junior (<= 2 năm kinh nghiệm)**.
 * **Phạm vi kỹ thuật trong repository:**
   * Thu thập dữ liệu & Đặc tả schema (Data Ingestion & Schemas).
@@ -40,7 +40,7 @@ Toàn bộ dữ liệu nguồn được lưu trữ tại thư mục [`data/`](fi
 | Tệp Dữ Liệu Gốc | Tài Liệu Đặc Tả Schema | Quy Mô | Vai Trò Trong Hệ Thống |
 | :--- | :--- | :--- | :--- |
 | [`candidates.json`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/candidates.json) | [`candidates.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/candidates.md) | 300 hồ sơ | Chuẩn hóa thông tin ứng viên từ CV/Form (kỹ năng, kinh nghiệm, đồ án, cấp bậc). Dùng để đối soát khoảng trống năng lực (Skill Gap Analysis). |
-| [`interview_frameworks.json`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/interview_frameworks.json) | [`interview_frameworks.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/interview_frameworks.md) | 16 vị trí | **Khung tri thức xương sống:** Quy trình giai đoạn (`interview_stages`), ma trận trọng số (`evaluation_matrix`), thang điểm neo 1–5 (`scoring_anchors`), ngân hàng câu hỏi kỹ thuật có barem chấm 3 mức và câu hỏi STAR. |
+| [`interview_frameworks.json`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/interview_frameworks.json) | [`interview_frameworks.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/interview_frameworks.md) | 25 vị trí | **Khung tri thức xương sống:** Quy trình giai đoạn (`interview_stages`), ma trận trọng số (`evaluation_matrix`), thang điểm neo 1–5 (`scoring_anchors`), ngân hàng câu hỏi kỹ thuật có barem chấm 3 mức và câu hỏi STAR. |
 | [`jobs_below_mid.json`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/jobs_below_mid.json) | [`jobs_below_mid.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/jobs_below_mid.md) | 395 bài đăng | **Thước đo thị trường thực tế:** Chứa các yêu cầu `must_have`, `preferred`, `skill_requirements`, `experience` được bóc tách từ các sàn tuyển dụng IT tại Việt Nam. |
 
 ---
@@ -57,7 +57,7 @@ flowchart TD
     end
 
     subgraph KnowledgeBase["2. Knowledge Base & Persistence Layer"]
-        KB1["Interview Frameworks (16 Roles)"]
+        KB1["Interview Frameworks (25 Roles)"]
         KB2["Curated Tech Q&A + Rubrics"]
         KB3["STAR Behavioral Library"]
         KB4["Market Skills & Domain Vocab"]
@@ -102,12 +102,12 @@ flowchart TD
 ## 6. Lộ Trình Triển Khai (Roadmap)
 
 - [x] **Phase 1: Chuẩn hóa Schema & Tài liệu hóa:**
-  - Khảo sát dữ liệu thô: 300 candidates, 16 frameworks, 395 JDs.
+  - Khảo sát dữ liệu thô: 300 candidates, 25 frameworks, 395 JDs.
   - Biên soạn tài liệu chi tiết: [`candidates.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/candidates.md), [`interview_frameworks.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/interview_frameworks.md), [`jobs_below_mid.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/data/jobs_below_mid.md).
   - Hoàn thiện tài liệu tổng quan hệ thống: [`README.md`](file:///c:/Users/Admin/NNH/Projects/VScode/evaludate/README.md).
-- [ ] **Phase 2: Khám phá Dữ liệu Chuyên sâu (EDA):**
+- [x] **Phase 2: Khám phá Dữ liệu Chuyên sâu (EDA):**
   - Thống kê phân bố kỹ năng, tỷ lệ trùng khớp (Overlap) giữa CV ứng viên và JD.
-  - Phân tích độ tương thích giữa 16 `position_id` với các chức danh thực tế từ JD.
+  - Phân tích độ tương thích giữa 25 `position_id` với các chức danh thực tế từ JD.
   - Xác định các trường rủi ro cao (Missing/Sparse fields).
 - [ ] **Phase 3: Thiết kế Ingestion Flow & Persistence Architecture:**
   - Mô hình hóa thực thể (Entity-Relationship & Knowledge Graph / Vector schema).

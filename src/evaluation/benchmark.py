@@ -12,6 +12,7 @@ from src.persistence.database import DatabaseManager
 from src.retrieval.naive_retriever import NaiveRetriever
 from src.retrieval.filtered_retriever import FilteredRetriever
 from src.retrieval.knowledge_retriever import KnowledgeGuidedRetriever
+from src.retrieval.hybrid_rag_retriever import HybridRAGRetriever
 from src.context_builder.assembler import ContextAssembler
 from src.evaluation.testset import get_benchmark_testset, BenchmarkTestCase
 from src.evaluation.metrics import (
@@ -29,11 +30,12 @@ class BenchmarkRunner:
         self.testset = get_benchmark_testset()
         self.llm_judge = FaithfulnessLLMJudge()
 
-        # Initialize the 3 retrieval strategies
+        # Initialize the 4 retrieval strategies
         self.strategies = {
             "Strategy 1 (Naive BM25)": NaiveRetriever(),
             "Strategy 2 (Metadata Filtered)": FilteredRetriever(self.db),
-            "Strategy 3 (Knowledge-Guided Skill-Gap)": KnowledgeGuidedRetriever(self.db)
+            "Strategy 3 (Knowledge-Guided Skill-Gap)": KnowledgeGuidedRetriever(self.db),
+            "Strategy 4 (Hybrid RAG + Vector + RRF + Rerank)": HybridRAGRetriever(db=self.db)
         }
 
     def run_benchmark(self) -> Dict[str, Dict[str, float]]:
@@ -70,8 +72,8 @@ class BenchmarkRunner:
                 precision = ContextPrecisionMetric.evaluate(retrieved, tc)
                 completeness = RubricCompletenessMetric.evaluate(retrieved)
                 
-                # LLM Faithfulness judge (sample once per test case on Strategy 3, heuristic on others)
-                if s_name == "Strategy 3 (Knowledge-Guided Skill-Gap)":
+                # LLM Faithfulness judge (sample once per test case on Strategy 3 & 4, heuristic on others)
+                if s_name in ["Strategy 3 (Knowledge-Guided Skill-Gap)", "Strategy 4 (Hybrid RAG + Vector + RRF + Rerank)"]:
                     faithfulness = self.llm_judge.evaluate(ctx.raw_prompt_context or "")
                 else:
                     faithfulness = 0.70 if s_name == "Strategy 1 (Naive BM25)" else 0.88

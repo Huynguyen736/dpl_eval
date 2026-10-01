@@ -26,7 +26,7 @@ BENCHMARK_TESTSET: List[BenchmarkTestCase] = [
         description="Java Backend Fresher applied to Java Spring Boot Engineer role",
         candidate_id="CV_JAVA_001",
         job_id="vnw_2110299",
-        expected_position_id="IF_JAVA",
+        expected_position_id="IF_BE_JAVA",
         expected_level="Fresher",
         expected_skills=["Java", "Spring Boot", "SQL"]
     ),
@@ -35,7 +35,7 @@ BENCHMARK_TESTSET: List[BenchmarkTestCase] = [
         description="Python Developer applied to Python & Vue Programmer role",
         candidate_id="CV_PY_001",
         job_id="vnw_2112744",
-        expected_position_id="IF_PY",
+        expected_position_id="IF_BE_GEN",
         expected_level="Fresher",
         expected_skills=["Python", "Vue.js", "SQL"]
     ),
@@ -44,7 +44,7 @@ BENCHMARK_TESTSET: List[BenchmarkTestCase] = [
         description="QA Engineer applied to Fresher QA Engineer role",
         candidate_id="CV_QA_001",
         job_id="vnw_2106297",
-        expected_position_id="IF_QA",
+        expected_position_id="IF_QA_QC",
         expected_level="Fresher",
         expected_skills=["Manual Testing", "Automation Testing", "SQL"]
     ),
@@ -53,7 +53,7 @@ BENCHMARK_TESTSET: List[BenchmarkTestCase] = [
         description="Embedded Engineer applied to Embedded Software (Flash Boot Loader) role",
         candidate_id="CV_SYS_001",
         job_id="vnw_2106484",
-        expected_position_id="IF_AUTO",
+        expected_position_id="IF_EMBEDDED",
         expected_level="Fresher",
         expected_skills=["C/C++", "Embedded Systems", "Microcontroller"]
     ),
@@ -62,7 +62,7 @@ BENCHMARK_TESTSET: List[BenchmarkTestCase] = [
         description="Data Specialist applied to Database Engineer DBA role",
         candidate_id="CV_DATA_001",
         job_id="itv_3911",
-        expected_position_id="IF_DATA",
+        expected_position_id="IF_DE",
         expected_level="Fresher",
         expected_skills=["SQL", "Oracle DB", "Database"]
     )

@@ -11,6 +11,7 @@ from src.models.framework import InterviewFramework
 from src.preprocessing.normalizer import SkillNormalizer
 from src.preprocessing.chunker import FrameworkChunker, KnowledgeChunk
 from src.persistence.database import DatabaseManager
+from src.persistence.vector_store import DenseVectorIndex
 
 class BM25Index:
     def __init__(self):
@@ -49,7 +50,9 @@ class IngestionService:
     def __init__(self, db: DatabaseManager = None):
         self.db = db or DatabaseManager()
         self.bm25_index = BM25Index()
+        self.vector_index = DenseVectorIndex(dim=64)
         self.index_path = os.path.join(config.INDEX_DIR, "bm25_chunks.pkl")
+        self.vector_index_path = os.path.join(config.INDEX_DIR, "dense_vector_chunks.pkl")
 
     def run_full_ingestion(self) -> Dict[str, int]:
         print("[IngestionService] Starting full ingestion pipeline...")
@@ -92,7 +95,12 @@ class IngestionService:
         # Build & save BM25 index on all chunks
         self.bm25_index.build_index(all_chunks)
         self.bm25_index.save(self.index_path)
-        print(f"[IngestionService] Ingested {len(raw_frameworks)} frameworks into {len(all_chunks)} semantic chunks.")
+
+        # Build & save Dense Vector index on all chunks
+        self.vector_index.build_index(all_chunks)
+        self.vector_index.save(self.vector_index_path)
+
+        print(f"[IngestionService] Ingested {len(raw_frameworks)} frameworks into {len(all_chunks)} semantic chunks (BM25 + Dense Vectors).")
 
         # 2. Ingest Candidates
         candidates_path = os.path.join(config.DATA_DIR, "candidates.json")
@@ -151,3 +159,13 @@ class IngestionService:
                 self.bm25_index.build_index(chunks)
                 self.bm25_index.save(self.index_path)
         return self.bm25_index
+
+    def get_vector_index(self) -> DenseVectorIndex:
+        if self.vector_index.doc_vectors is None:
+            if os.path.exists(self.vector_index_path):
+                self.vector_index.load(self.vector_index_path)
+            else:
+                chunks = self.db.get_all_chunks()
+                self.vector_index.build_index(chunks)
+                self.vector_index.save(self.vector_index_path)
+        return self.vector_index

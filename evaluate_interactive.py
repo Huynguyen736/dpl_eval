@@ -27,6 +27,7 @@ from src.persistence.database import DatabaseManager
 from src.retrieval.naive_retriever import NaiveRetriever
 from src.retrieval.filtered_retriever import FilteredRetriever
 from src.retrieval.knowledge_retriever import KnowledgeGuidedRetriever
+from src.retrieval.hybrid_rag_retriever import HybridRAGRetriever
 from src.context_builder.assembler import ContextAssembler
 from src.evaluation.testset import get_benchmark_testset, BenchmarkTestCase
 from src.evaluation.metrics import (
@@ -72,7 +73,8 @@ def run_single_evaluation(candidate_id: str, job_id: str, expected_pos: str = No
     strategies = {
         "Strategy 1 (Naive BM25)": NaiveRetriever(),
         "Strategy 2 (Metadata Filtered)": FilteredRetriever(db),
-        "Strategy 3 (Knowledge-Guided Skill-Gap)": KnowledgeGuidedRetriever(db)
+        "Strategy 3 (Knowledge-Guided Skill-Gap)": KnowledgeGuidedRetriever(db),
+        "Strategy 4 (Hybrid RAG + Vector + RRF + Rerank)": HybridRAGRetriever(db=db)
     }
 
     test_case = BenchmarkTestCase(
@@ -87,9 +89,9 @@ def run_single_evaluation(candidate_id: str, job_id: str, expected_pos: str = No
 
     llm_judge = FaithfulnessLLMJudge()
 
-    print_separator("KẾT QUẢ ĐÁNH GIÁ ĐỊNH LƯỢNG RAGAS (3 CHIẾN LƯỢC)")
-    print(f"{'Chiến Lược':<40} | {'Recall':<8} | {'Precision':<10} | {'Rubric':<8} | {'Faithfulness':<12}")
-    print("-" * 88)
+    print_separator("KẾT QUẢ ĐÁNH GIÁ ĐỊNH LƯỢNG RAGAS (4 CHIẾN LƯỢC)")
+    print(f"{'Chiến Lược':<45} | {'Recall':<8} | {'Precision':<10} | {'Rubric':<8} | {'Faithfulness':<12}")
+    print("-" * 95)
 
     assembled_contexts = {}
 
@@ -103,15 +105,15 @@ def run_single_evaluation(candidate_id: str, job_id: str, expected_pos: str = No
         precision = ContextPrecisionMetric.evaluate(retrieved, test_case)
         rubric_comp = RubricCompletenessMetric.evaluate(retrieved)
 
-        # Call LLM Judge for Strategy 3, heuristic for baselines
-        if "Strategy 3" in s_name:
+        # Call LLM Judge for Strategy 3 and 4, heuristic for baselines
+        if "Strategy 4" in s_name or "Strategy 3" in s_name:
             faithfulness = llm_judge.evaluate(ctx.raw_prompt_context or "")
         elif "Strategy 2" in s_name:
             faithfulness = 0.88
         else:
             faithfulness = 0.70
 
-        print(f"{s_name:<40} | {recall*100:>6.1f}% | {precision*100:>8.1f}% | {rubric_comp*100:>6.1f}% | {faithfulness*100:>10.1f}%")
+        print(f"{s_name:<45} | {recall*100:>6.1f}% | {precision*100:>8.1f}% | {rubric_comp*100:>6.1f}% | {faithfulness*100:>10.1f}%")
 
     # Detailed breakdown for Strategy 3
     s3_ctx = assembled_contexts["Strategy 3 (Knowledge-Guided Skill-Gap)"]

@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node modules
+node_modules/
+.report-build/node_modules/
+
+# Staging build artifacts
+.report-build/staging/
+
+# Pytest & caches
+.pytest_cache/
+.omx/

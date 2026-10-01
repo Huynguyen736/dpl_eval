@@ -26,7 +26,7 @@ class FrameworkChunker:
         # 1. Chunk Technical Questions
         for q in framework.technical_questions:
             # Construct a rich searchable text
-            concepts = ", ".join(q.key_concepts)
+            concepts = ", ".join(q.key_concepts) if q.key_concepts else ""
             searchable_text = f"Role: {framework.role_title} | Level: {q.level}\nQuestion: {q.question}\nKey Concepts: {concepts}\nExpected Answer: {q.expected_answer}"
             chunks.append(
                 KnowledgeChunk(
@@ -57,7 +57,7 @@ class FrameworkChunker:
 
         # 3. Chunk Interview Stages
         for stage in framework.interview_stages:
-            focus = "; ".join(stage.focus_areas)
+            focus = "; ".join(stage.focus_areas) if stage.focus_areas else (stage.description or "")
             searchable_text = f"Role: {framework.role_title} | Stage {stage.stage}: {stage.name} ({stage.duration})\nInterviewer: {stage.interviewer}\nFocus: {focus}\nPassing Criteria: {stage.passing_criteria}"
             chunks.append(
                 KnowledgeChunk(

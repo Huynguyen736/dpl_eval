@@ -82,47 +82,56 @@
   `SQL` (122), `Python` (89), `CNTT / Kỹ thuật phần mềm` (78), `Machine Learning` (73), `Java` (64), `JavaScript` (52), `Git / GitFlow` (49), `C/C++` (46), `Agile / Scrum` (43), `REST/gRPC` (42), `CAN / LIN Protocols` (41), `C# / .NET` (38), `Embedded Systems` (34), `Linux` (33), `LLM / GenAI` (33), `Docker` (32), `CI/CD` (30), `Data Analytics / BI` (30), `ReactJS` (28), `Business Analysis (BA)` (27)
 
 ## 3. Phân Tích Khung Phỏng Vấn Chuẩn (`interview_frameworks.json`)
-- **Tổng số vị trí có framework chuẩn:** 16
-- **Tổng số câu hỏi kỹ thuật chuẩn hóa:** 49 câu (Trung bình 3.1 câu/vị trí)
-- **Tổng số câu hỏi hành vi STAR:** 48 câu (Trung bình 3.0 câu/vị trí)
+- **Tổng số vị trí có framework chuẩn:** 25
+- **Tổng số câu hỏi kỹ thuật chuẩn hóa:** 350 câu (Trung bình 14.0 câu/vị trí)
+- **Tổng số câu hỏi hành vi STAR:** 75 câu (Trung bình 3.0 câu/vị trí)
 
-### 3.1. Danh mục 16 vị trí và quy mô câu hỏi:
+### 3.1. Danh mục 25 vị trí và quy mô câu hỏi:
 | Position ID | Tên Vị Trí (Role Title) | Số Câu Kỹ Thuật | Số Câu STAR | Số Giai Đoạn (Stages) | Trụ Cột Đánh Giá |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| `IF_FE` | Frontend Developer (React / JavaScript / TypeScript) | 4 | 3 | 4 | 4 |
-| `IF_JAVA` | Backend Developer (Java / Spring Boot / Microservices) | 3 | 3 | 4 | 4 |
-| `IF_PY` | Python Developer (Django / FastAPI / Python Backend) | 3 | 3 | 4 | 4 |
-| `IF_NET` | .NET Developer (C# / ASP.NET Core / Entity Framework) | 3 | 3 | 4 | 4 |
-| `IF_QA` | Software QA & Automation Test Engineer (Manual & Automation) | 3 | 3 | 4 | 4 |
-| `IF_DEVOPS` | DevOps & Cloud Engineer (Docker / Kubernetes / AWS / CI/CD) | 3 | 3 | 4 | 4 |
-| `IF_AI` | AI & Machine Learning Engineer (Deep Learning / NLP / Computer Vision) | 3 | 3 | 4 | 4 |
-| `IF_DATA` | Data Scientist & Data Engineer (SQL / ETL / Data Warehousing) | 3 | 3 | 4 | 4 |
-| `IF_SEC` | Cyber Security & SOC Analyst (Network Security / Pentest) | 3 | 3 | 4 | 4 |
-| `IF_SEMI` | Semiconductor & IC Design Engineer (Verilog / RTL / FPGA / ASIC) | 3 | 3 | 4 | 4 |
-| `IF_AUTO` | Embedded Automotive Software Engineer (AUTOSAR / Embedded C / CAN bus) | 3 | 3 | 4 | 4 |
-| `IF_BA` | IT Business Analyst (Requirements / Agile / UML / BPMN) | 3 | 3 | 4 | 4 |
-| `IF_ROBOT` | Robotics & Autonomous Systems Engineer (ROS / C++ / Control / SLAM) | 3 | 3 | 4 | 4 |
-| `IF_UIUX` | UI/UX Designer & Product Designer (Figma / Usability Heuristics) | 3 | 3 | 4 | 4 |
-| `IF_CHAIN` | Blockchain & Web3 Developer (Solidity / Smart Contracts / Ethereum) | 3 | 3 | 4 | 4 |
-| `IF_SYS` | Systems & IT Infrastructure Engineer (Linux / Windows Server / Networking) | 3 | 3 | 4 | 4 |
+| `IF_AI` | AI Engineer (Kỹ sư Trí tuệ nhân tạo) | 18 | 3 | 5 | 4 |
+| `IF_AI_SWE` | AI Software Engineer (Kỹ sư Phần mềm AI) | 12 | 3 | 5 | 4 |
+| `IF_AGENTIC_AI` | Agentic AI Engineer (Kỹ sư AI Tác tử / AI Agent) | 12 | 3 | 5 | 4 |
+| `IF_DA` | Data Analyst (Chuyên viên Phân tích dữ liệu) | 12 | 3 | 5 | 4 |
+| `IF_DE` | Data Engineer (Kỹ sư Kỹ thuật dữ liệu) | 18 | 3 | 5 | 4 |
+| `IF_DS` | Data Scientist (Nhà Khoa học dữ liệu) | 8 | 3 | 5 | 4 |
+| `IF_QA_QC` | Software QA/QC Engineer (Kỹ sư Kiểm thử phần mềm QA/QC) | 18 | 3 | 5 | 4 |
+| `IF_AUTO_QA` | Automation QA/QC Engineer (Kỹ sư Kiểm thử tự động) | 12 | 3 | 5 | 4 |
+| `IF_FE` | Frontend Developer (Lập trình viên Frontend) | 18 | 3 | 5 | 4 |
+| `IF_BE_JAVA` | Backend Developer - Java (Lập trình viên Backend Java) | 18 | 3 | 5 | 4 |
+| `IF_BE_NET` | Backend Developer - .NET (Lập trình viên Backend .NET) | 8 | 3 | 5 | 4 |
+| `IF_BE_PHP` | Backend Developer - PHP (Lập trình viên Backend PHP) | 12 | 3 | 5 | 4 |
+| `IF_BE_GEN` | Backend Developer - Chung (Lập trình viên Backend) | 12 | 3 | 5 | 4 |
+| `IF_FULLSTACK` | FullStack Developer (Lập trình viên Fullstack) | 18 | 3 | 5 | 4 |
+| `IF_SWE` | Software Engineer (Kỹ sư Phần mềm) | 18 | 3 | 5 | 4 |
+| `IF_SWD` | Software Developer (Lập trình viên Phần mềm) | 18 | 3 | 5 | 4 |
+| `IF_EMBEDDED` | Embedded Software Engineer (Kỹ sư Phần mềm nhúng) | 18 | 3 | 5 | 4 |
+| `IF_BA` | Business Analyst - BA (Chuyên viên Phân tích nghiệp vụ IT) | 12 | 3 | 5 | 4 |
+| `IF_DEVOPS` | DevOps Engineer (Kỹ sư Vận hành & Phát triển) | 18 | 3 | 5 | 4 |
+| `IF_MOBILE_ANDROID` | Mobile Developer - Android (Lập trình viên Di động Android) | 12 | 3 | 5 | 4 |
+| `IF_MOBILE_IOS` | Mobile Developer - iOS (Lập trình viên Di động iOS) | 8 | 3 | 5 | 4 |
+| `IF_NETWORK` | Network Engineer (Kỹ sư Quản trị Mạng) | 18 | 3 | 5 | 4 |
+| `IF_UNITY` | Unity Game Developer (Lập trình viên Game Unity) | 12 | 3 | 5 | 4 |
+| `IF_ERP` | ERP Developer / Consultant (Chuyên viên Tư vấn / Phát triển ERP) | 8 | 3 | 5 | 4 |
+| `IF_PRODUCT_ENG` | Product Engineer (Kỹ sư Sản phẩm) | 12 | 3 | 5 | 4 |
 
 ## 4. Phân Tích Đối Sánh Liên Tập Dữ Liệu (Cross-Dataset Mapping & Alignment)
 ### 4.1. Khả năng ánh xạ từ Chức danh JD (`normalized_job_title`) sang Framework:
 - Số lượng chức danh chuẩn hóa khác nhau trong 395 JDs: `25` danh hiệu.
-  - `Software Engineer` (160 bài) -> *(Cần fallback/semantic search)*
-  - `Software QA/QC Engineer` (64 bài) -> `IF_QA`
-  - `Embedded Software Engineer` (18 bài) -> `IF_AUTO`
+  - `Software Engineer` (160 bài) -> `IF_SWE`
+  - `Software QA/QC Engineer` (64 bài) -> `IF_QA_QC`
+  - `Embedded Software Engineer` (18 bài) -> `IF_SWE`
   - `Business Analyst (BA)` (18 bài) -> `IF_BA`
-  - `Data Analyst` (18 bài) -> `IF_DATA`
+  - `Data Analyst` (18 bài) -> `IF_DA`
   - `AI Engineer` (16 bài) -> `IF_AI`
-  - `FullStack Developer` (15 bài) -> *(Cần fallback/semantic search)*
-  - `Backend Developer (Java)` (12 bài) -> `IF_JAVA`
-  - `Software Developer` (10 bài) -> *(Cần fallback/semantic search)*
+  - `FullStack Developer` (15 bài) -> `IF_FULLSTACK`
+  - `Backend Developer (Java)` (12 bài) -> `IF_BE_JAVA`
+  - `Software Developer` (10 bài) -> `IF_SWD`
   - `Frontend Developer` (10 bài) -> `IF_FE`
   - `DevOps Engineer` (9 bài) -> `IF_DEVOPS`
-  - `Data Engineer` (8 bài) -> `IF_DATA`
-  - `Mobile Developer (Android)` (7 bài) -> `IF_DATA`
-  - `Network Engineer` (4 bài) -> `IF_SYS`
+  - `Data Engineer` (8 bài) -> `IF_DE`
+  - `Mobile Developer (Android)` (7 bài) -> `IF_DA`
+  - `Network Engineer` (4 bài) -> `IF_NETWORK`
   - `AI Software Engineer` (4 bài) -> `IF_AI`
 
 ### 4.2. Độ tương đồng từ vựng kỹ năng (Skill Vocabulary Overlap):

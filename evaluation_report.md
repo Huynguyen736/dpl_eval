@@ -5,9 +5,9 @@
 ## 1. Bảng Tổng Hợp Kết Quả Điểm Số (Summary Benchmark)
 | Chiến Lược Retrieval (Strategy) | Context Recall (Độ ĐỦ) | Context Precision (Độ ĐÚNG) | Rubric Completeness | Faithfulness (Độ Tin Cậy) | Tổng Điểm Trung Bình |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Strategy 1 (Naive BM25)** | **63.9%** | **97.8%** | **65.0%** | **70.0%** | **74.2%** |
-| **Strategy 2 (Metadata Filtered)** | **52.8%** | **84.5%** | **100.0%** | **88.0%** | **81.3%** |
-| **Strategy 3 (Knowledge-Guided Skill-Gap)** | **63.9%** | **97.8%** | **100.0%** | **81.3%** | **85.7%** |
+| **Strategy 1 (Naive BM25)** | **83.4%** | **68.9%** | **45.0%** | **70.0%** | **66.8%** |
+| **Strategy 2 (Metadata Filtered)** | **52.8%** | **93.3%** | **100.0%** | **88.0%** | **83.5%** |
+| **Strategy 3 (Knowledge-Guided Skill-Gap)** | **58.3%** | **93.3%** | **100.0%** | **95.0%** | **86.7%** |
 
 ## 2. Phân Tích Chuyên Sâu Từng Chiến Lược
 ### 2.1. Chiến Lược 1: Naive BM25 (Baseline)
@@ -26,24 +26,24 @@
 ## 3. Bảng Chi Tiết Từng Kịch Bản Kiểm Thử (Detailed Test Cases)
 | Test ID | Chiến Lược | Vị Trí Lấy Ra | Vị Trí Kỳ Vọng | Recall | Precision | Completeness | Faithfulness |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `TC_FE_01` | Strategy 1 (Naive BM25) | `IF_FE` | `IF_FE` | 50% | 100% | 70% | 70% |
+| `TC_FE_01` | Strategy 1 (Naive BM25) | `IF_FULLSTACK` | `IF_FE` | 100% | 60% | 40% | 70% |
 | `TC_FE_01` | Strategy 2 (Metadata Filtered) | `IF_FE` | `IF_FE` | 50% | 100% | 100% | 88% |
-| `TC_FE_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_FE` | `IF_FE` | 50% | 100% | 100% | 82% |
-| `TC_JAVA_01` | Strategy 1 (Naive BM25) | `IF_JAVA` | `IF_JAVA` | 67% | 87% | 70% | 70% |
-| `TC_JAVA_01` | Strategy 2 (Metadata Filtered) | `IF_JAVA` | `IF_JAVA` | 67% | 87% | 100% | 88% |
-| `TC_JAVA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_JAVA` | `IF_JAVA` | 67% | 87% | 100% | 88% |
-| `TC_PY_01` | Strategy 1 (Naive BM25) | `IF_PY` | `IF_PY` | 67% | 100% | 40% | 70% |
-| `TC_PY_01` | Strategy 2 (Metadata Filtered) | `IF_FE` | `IF_PY` | 0% | 60% | 100% | 88% |
-| `TC_PY_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_PY` | `IF_PY` | 33% | 100% | 100% | 80% |
-| `TC_QA_01` | Strategy 1 (Naive BM25) | `IF_QA` | `IF_QA` | 67% | 100% | 70% | 70% |
-| `TC_QA_01` | Strategy 2 (Metadata Filtered) | `IF_QA` | `IF_QA` | 67% | 100% | 100% | 88% |
-| `TC_QA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_QA` | `IF_QA` | 67% | 100% | 100% | 72% |
-| `TC_AUTO_01` | Strategy 1 (Naive BM25) | `IF_AUTO` | `IF_AUTO` | 67% | 100% | 70% | 70% |
-| `TC_AUTO_01` | Strategy 2 (Metadata Filtered) | `IF_AUTO` | `IF_AUTO` | 67% | 100% | 100% | 88% |
-| `TC_AUTO_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_AUTO` | `IF_AUTO` | 67% | 100% | 100% | 88% |
-| `TC_DATA_01` | Strategy 1 (Naive BM25) | `IF_DATA` | `IF_DATA` | 67% | 100% | 70% | 70% |
-| `TC_DATA_01` | Strategy 2 (Metadata Filtered) | `IF_FE` | `IF_DATA` | 67% | 60% | 100% | 88% |
-| `TC_DATA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_DATA` | `IF_DATA` | 100% | 100% | 100% | 78% |
+| `TC_FE_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_FE` | `IF_FE` | 50% | 100% | 100% | 95% |
+| `TC_JAVA_01` | Strategy 1 (Naive BM25) | `IF_BE_JAVA` | `IF_BE_JAVA` | 100% | 87% | 70% | 70% |
+| `TC_JAVA_01` | Strategy 2 (Metadata Filtered) | `IF_BE_JAVA` | `IF_BE_JAVA` | 33% | 100% | 100% | 88% |
+| `TC_JAVA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_BE_JAVA` | `IF_BE_JAVA` | 33% | 100% | 100% | 95% |
+| `TC_PY_01` | Strategy 1 (Naive BM25) | `IF_BE_GEN` | `IF_BE_GEN` | 67% | 73% | 40% | 70% |
+| `TC_PY_01` | Strategy 2 (Metadata Filtered) | `IF_FE` | `IF_BE_GEN` | 0% | 60% | 100% | 88% |
+| `TC_PY_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_BE_GEN` | `IF_BE_GEN` | 0% | 87% | 100% | 95% |
+| `TC_QA_01` | Strategy 1 (Naive BM25) | `IF_AUTO_QA` | `IF_QA_QC` | 67% | 47% | 40% | 70% |
+| `TC_QA_01` | Strategy 2 (Metadata Filtered) | `IF_QA_QC` | `IF_QA_QC` | 67% | 100% | 100% | 88% |
+| `TC_QA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_QA_QC` | `IF_QA_QC` | 67% | 100% | 100% | 95% |
+| `TC_AUTO_01` | Strategy 1 (Naive BM25) | `IF_EMBEDDED` | `IF_EMBEDDED` | 67% | 100% | 40% | 70% |
+| `TC_AUTO_01` | Strategy 2 (Metadata Filtered) | `IF_EMBEDDED` | `IF_EMBEDDED` | 67% | 100% | 100% | 88% |
+| `TC_AUTO_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_EMBEDDED` | `IF_EMBEDDED` | 100% | 87% | 100% | 95% |
+| `TC_DATA_01` | Strategy 1 (Naive BM25) | `IF_AI_SWE` | `IF_DE` | 100% | 47% | 40% | 70% |
+| `TC_DATA_01` | Strategy 2 (Metadata Filtered) | `IF_DE` | `IF_DE` | 100% | 100% | 100% | 88% |
+| `TC_DATA_01` | Strategy 3 (Knowledge-Guided Skill-Gap) | `IF_DE` | `IF_DE` | 100% | 87% | 100% | 95% |
 
 ## 4. Kết Luận Kiến Trúc (Architecture Takeaway)
 Kết quả benchmark định lượng chứng minh rằng đối với hệ thống AI Mock Interview:

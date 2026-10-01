@@ -17,11 +17,11 @@ class ContextRecallMetric:
 
         # Build corpus of retrieved context text
         q_texts = " ".join([
-            f"{q.question} {' '.join(q.key_concepts)} {q.expected_answer}"
+            f"{q.question} {' '.join(q.key_concepts) if q.key_concepts else ''} {q.expected_answer}"
             for q in retrieved.selected_technical_questions
         ]).lower()
         stage_texts = " ".join([
-            f"{s.name} {' '.join(s.focus_areas)}"
+            f"{getattr(s, 'stage_name', None) or s.name} {' '.join(s.focus_areas) if s.focus_areas else (getattr(s, 'description', '') or '')}"
             for s in retrieved.interview_stages
         ]).lower()
         corpus = f"{q_texts} {stage_texts} {retrieved.role_title.lower()}".lower()

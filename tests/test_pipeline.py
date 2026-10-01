@@ -9,6 +9,8 @@ from src.context_builder.assembler import ContextAssembler
 from src.retrieval.naive_retriever import NaiveRetriever
 from src.retrieval.filtered_retriever import FilteredRetriever
 from src.retrieval.knowledge_retriever import KnowledgeGuidedRetriever
+from src.retrieval.hybrid_rag_retriever import HybridRAGRetriever
+from src.persistence.vector_store import DenseVectorIndex, ReciprocalRankFusion, SkillGapAwareReranker
 
 def test_skill_normalizer():
     raw_skills = ["ReactJS", "Node.js", "C# / .NET", "Python", "unknown_tool"]
@@ -90,3 +92,90 @@ def test_retrieval_strategies():
     assert s3.position_id == "IF_FE"
     assert len(s3.selected_technical_questions) > 0
     assert len(s3.evaluation_matrix) > 0
+
+def test_framework_all_25_loaded_and_validated():
+    import json
+    import os
+    from src.config import config
+    from src.models.framework import InterviewFramework
+
+    fw_path = os.path.join(config.DATA_DIR, "interview_frameworks.json")
+    with open(fw_path, "r", encoding="utf-8") as f:
+        raw_list = json.load(f)
+
+    assert len(raw_list) == 25, f"Expected 25 frameworks, got {len(raw_list)}"
+
+    db = DatabaseManager()
+    for item in raw_list:
+        fw = InterviewFramework.model_validate(item)
+        assert fw.position_id is not None
+        assert fw.role_title is not None
+        assert len(fw.interview_stages) >= 3
+        assert len(fw.technical_questions) >= 5
+        assert len(fw.behavioral_questions) >= 2
+        assert len(fw.evaluation_matrix) >= 3
+
+        # Verify DB persistence
+        db_fw = db.get_framework(fw.position_id)
+        assert db_fw is not None
+        assert db_fw["position_id"] == fw.position_id
+
+def test_multirole_knowledge_retrieval():
+    from src.evaluation.testset import get_benchmark_testset
+
+    db = DatabaseManager()
+    kg = KnowledgeGuidedRetriever(db)
+    testset = get_benchmark_testset()
+
+    for tc in testset:
+        c_dict = db.get_candidate(tc.candidate_id)
+        j_dict = db.get_job(tc.job_id)
+        c = CandidateProfile.model_validate(c_dict)
+        j = JobDescription.model_validate(j_dict)
+        ret = kg.retrieve(c, j)
+        assert ret.position_id == tc.expected_position_id, f"Failed for {tc.test_id}: expected {tc.expected_position_id}, got {ret.position_id}"
+
+def test_framework_chunker_new_stages():
+    from src.models.framework import InterviewFramework
+
+    db = DatabaseManager()
+    fw_dict = db.get_framework("IF_FE")
+    fw = InterviewFramework.model_validate(fw_dict)
+    chunks = FrameworkChunker.chunk_framework(fw)
+
+    stage_chunks = [c for c in chunks if c.chunk_type.value == "stage_guide"]
+    assert len(stage_chunks) == len(fw.interview_stages)
+    for sc in stage_chunks:
+        assert "Stage" in sc.searchable_text
+        assert sc.metadata.get("stage_name") is not None
+
+def test_hybrid_rag_strategy_4():
+    db = DatabaseManager()
+    cand_dict = db.get_candidate("CV_FE_001")
+    job_dict = db.get_job("vnw_2107318")
+    cand = CandidateProfile.model_validate(cand_dict)
+    job = JobDescription.model_validate(job_dict)
+
+    s4 = HybridRAGRetriever(db=db)
+    ctx = s4.retrieve(cand, job, top_k_questions=3)
+
+    assert ctx.retrieval_strategy_used == "hybrid_rag_rrf_rerank"
+    assert ctx.position_id == "IF_FE"
+    assert len(ctx.selected_technical_questions) == 3
+    assert len(ctx.selected_behavioral_questions) == 1
+    assert len(ctx.evaluation_matrix) > 0
+    assert ctx.passing_threshold != ""
+    assert ctx.market_context is not None
+
+    # Test RRF fusion directly
+    rankings = [
+        (["doc_A", "doc_B", "doc_C"], 1.0),
+        (["doc_B", "doc_C", "doc_D"], 1.2)
+    ]
+    fused = ReciprocalRankFusion.fuse(rankings, k=60)
+    assert len(fused) == 4
+    # doc_B should rank highest because it appears at rank 2 in list1 and rank 1 in list2
+    top_doc, _ = fused[0]
+    assert top_doc == "doc_B"
+
+
